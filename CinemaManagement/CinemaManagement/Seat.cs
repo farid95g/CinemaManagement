@@ -8,17 +8,24 @@ namespace CinemaManagement
     {
         public int Row;
         public int Column;
-        public bool Status = true;
+        public string Status;
+        public enum StatusOptions
+        {
+            free,
+            reserved,
+            sold
+        }
 
         public Seat(int row, int column)
         {
             Row = row;
             Column = column;
+            Status = StatusOptions.free.ToString();
         }
 
         public override string ToString()
         {
-            return $"The seat in the row {Row} and in the column {Column} {(Status ? "is free" : "has been sold.")}";
+            return $"The seat in the row {Row} and in the column {Column} {(Status == "free" ? "is free" : $"has been {Status}.")}";
         }
     }
 }

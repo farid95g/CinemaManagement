@@ -37,14 +37,28 @@ namespace CinemaManagement
         //reserve a seat
         public void ReserveSeat(int row, int column)
         {
-            if (Seats[row - 1, column - 1].Status)
+            if (Seats[row - 1, column - 1].Status == "free")
             {
-                Seats[row - 1, column - 1].Status = false;
-                Console.WriteLine($"You have reserved the seat in the row {row} and in the column {column}.");
+                Seats[row - 1, column - 1].Status = Seat.StatusOptions.reserved.ToString();
+                Console.WriteLine($"You have successfully reserved the seat in the row {row} and in the column {column}.");
             }
             else
             {
-                Console.WriteLine($"Sorry, the seat in the row {row} and column {column} has been already reserved.");
+                Console.WriteLine($"Sorry, the seat in the row {row} and column {column} has been already {Seats[row - 1, column - 1].Status}.");
+            }
+        }
+
+        //buy a seat
+        public void BuySeat(int row, int column)
+        {
+            if (Seats[row - 1, column - 1].Status == "free")
+            {
+                Seats[row - 1, column - 1].Status = Seat.StatusOptions.sold.ToString();
+                Console.WriteLine($"You have successfully bought the seat in the row {row} and in the column {column}.");
+            }
+            else
+            {
+                Console.WriteLine($"Sorry, the seat in the row {row} and column {column} has been {(Seats[row - 1, column - 1].Status.ToString() == "reserved" ? "reserved." : "already sold.")}");
             }
         }
     }
